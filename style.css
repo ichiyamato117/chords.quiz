@@ -1,0 +1,190 @@
+/* カラーパレット */
+:root{
+  --bg: #f6fbf6;
+  --mint: #9bbd9e;
+  --mint-dark: #7ea283;
+  --muted: #d6d8d6;
+  --text: #2f4f3f;
+  --white: #ffffff;
+  --box-shadow: rgba(0,0,0,0.08);
+}
+
+/* 全体 */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  padding:10px 14px 60px;
+  background:var(--bg);
+  color:var(--text);
+  font-family: "M PLUS Rounded 1c", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+/* タイトル＋モード選択エリア（上部） */
+.title-area{
+  text-align:center;
+  margin:6px 0 12px;
+  padding:12px;
+  border-radius:12px;
+}
+.title-area .mode-row{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.select, .action-btn{
+  padding:9px 12px;
+  font-size:15px;
+  border-radius:10px;
+  border:none;
+  background:var(--white);
+  box-shadow:0 2px 6px var(--box-shadow);
+}
+.action-btn{
+  background:var(--mint);
+  color:var(--white);
+  font-weight:700;
+}
+
+/* 進行名と（数字進行）は別表示。数字は結果時に表示 */
+.progress-title{
+  margin-top:12px;
+  font-size:28px;
+  color:var(--mint-dark);
+  font-weight:800;
+}
+.progress-num{
+  margin-top:6px;
+  color:var(--mint-dark);
+  font-size:16px;
+  opacity:0.0; /* 非表示（結果時に見せる） */
+  transition: opacity 0.18s;
+}
+
+/* メイン領域：ボックス＋選択肢ラップ */
+.main-wrap{
+  position:relative;
+  margin-top:10px;
+}
+
+/* ボックス群（問題表示） */
+#boxes{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin: 8px 0 12px;
+}
+.box{
+  width:72px;
+  height:44px;
+  background:var(--muted);
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:700;
+  color:#666;
+  position:relative;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  cursor:pointer;
+  user-select:none;
+}
+.box.current{ background:#dbe6db; color:var(--text); }
+.box.correct{ background:var(--mint-dark); color:var(--white); box-shadow:none; }
+.box.wrong{ background:#f7c6c6; color:#7a2b2b; box-shadow:none; }
+.correct-answer{
+  position:absolute;
+  top:-18px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:12px;
+  color:var(--text);
+}
+
+/* 選択肢群 */
+#choices{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:12px;
+  justify-items:center;
+  margin: 12px auto 28px;
+  max-width:420px;
+}
+.choice{
+  width:120px;
+  padding:12px 8px;
+  border-radius:12px;
+  background:var(--mint);
+  color:var(--white);
+  border:none;
+  font-weight:700;
+  box-shadow:0 6px 14px rgba(0,0,0,0.06);
+  cursor:pointer;
+}
+
+/* ×（取り消し）ボタン：ボックスと選択肢の間の右端 */
+.undo-x{
+  position:absolute;
+  right:6px;
+  top: 25%;               /* ← ここを42%から25%に上げた！ */
+  transform: translateY(-50%);
+  width:46px;             /* ← 小さくした */
+  height:46px;            /* ← 小さくした */
+  border-radius:12px;
+  background:var(--mint-dark);
+  color:var(--white);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:20px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
+  cursor:pointer;
+  border:none;
+  z-index:10;             /* ← 被り防止 */
+}
+
+/* スマホ用さらに微調整 */
+@media (max-width:420px){
+  .undo-x{
+    top: 10%;             /* スマホはさらに上へ */
+    right:4px;
+    width:42px;
+    height:42px;
+    font-size:18px;
+  }
+}
+
+/* Nextボタン（下部右寄せ）*/
+.bottom-wrap{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+  padding:0 6px;
+}
+.next-btn{
+  background:var(--mint-dark);
+  color:var(--white);
+  padding:10px 18px;
+  border-radius:10px 0 0 10px;
+  font-weight:800;
+  box-shadow:0 6px 14px rgba(0,0,0,0.08);
+  display:none; /* 結果が出たら表示 */
+  border:none;
+}
+
+/* 小さいスコア表示（任意） */
+#score{ font-weight:700; color:var(--text); margin-left:8px; }
+
+/* レスポンシブ */
+@media (max-width:420px){
+  .choice{ width:100px; font-size:15px; }
+  .box{ width:64px; height:42px; }
+  .progress-title{ font-size:24px; }
+}

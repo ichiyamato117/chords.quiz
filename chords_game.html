@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>よくある進行クイズ — 改良版</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<!-- タイトル + モード選択 -->
+<div class="title-area">
+  <div class="mode-row">
+    <select id="mode" class="select">
+      <option value="1">1個</option>
+      <option value="2">2個</option>
+      <option value="3">3個</option>
+      <option value="all">よくある進行</option>
+    </select>
+    <button id="start" class="action-btn">スタート</button>
+  </div>
+
+  <div class="progress-title" id="progress-name">よくある進行</div>
+  <div class="progress-num" id="progress-num">(0000進行)</div>
+</div>
+
+
+<!-- メイン -->
+<div class="main-wrap">
+  <div id="boxes" class="box-container"></div>
+
+  <!-- ×取り消しボタン（右端） -->
+  <button id="undo-x" class="undo-x" title="取り消す">✕</button>
+
+  <!-- 選択肢 -->
+  <div id="choices"></div>
+</div>
+
+<!-- 下部：Next（結果後に表示）とスコア -->
+<div class="bottom-wrap">
+  <div id="score">連続正解: 0</div>
+  <button id="next" class="next-btn">Next</button>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

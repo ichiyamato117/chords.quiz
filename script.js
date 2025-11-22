@@ -211,4 +211,5 @@ function checkResult(){
 /* Next押したら次問題 */
 function nextQuestion(){
   startQuiz();
-})();
+
+}();
